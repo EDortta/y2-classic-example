@@ -23,24 +23,11 @@ services:
     volumes:
       - ./logs:/var/log
       - ./web:/var/www/html
-      - ~/Sync/Y2/src:/var/www/html/vendor/edortta/yeapf2/src
     networks:
       - spi-network
 
-  # pgsql:
-  #   build:
-  #     context: ./infra/postgres
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - "5432:5432"
-  #   volumes:
-  #     - pgdata:/var/lib/postgresql/data
-  #   networks:
-  #     - spi-network
 
 networks:
   spi-network:
     driver: bridge
 
-# volumes:
-#   pgdata:
