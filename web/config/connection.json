@@ -1,0 +1,21 @@
+{
+    "redis": {
+        "server": "redis",
+        "_server": "127.0.0.1",
+        "port": 6379,
+        "password": "R3d1s@P@ssw0rd2023!",
+        "halt_on_error": true
+    },
+    "pdo": {
+        "driver": "pgsql",
+        "server": "db",
+        "_server": "127.0.0.1",
+        "port": 5432,
+        "dbname": "main",
+        "schema": "public",
+        "user": "postgres",
+        "password": "M@inD8b@seP@ssw0rd2023!",
+        "halt_on_error": true,
+        "pool": 1
+    }
+}

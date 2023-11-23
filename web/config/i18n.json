@@ -1,0 +1,5 @@
+{
+    "model": "watson",
+    "url": "https://api.us-south.language-translator.watson.cloud.ibm.com/instances/YOUR_INSTANCE_ID/v3/translate?version=2018-05-01",
+    "apikey": "YOUR_API_KEY"
+}
