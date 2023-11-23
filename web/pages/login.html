@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link href="pages/assets/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="pages/assets/css/styles.css">
+</head>
+<body>
+  <!-- Login form -->
+  <div class="container">
+    <h1>Login</h1>
+    <form id="loginForm">
+      <!-- Form fields -->
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input type="text" id="username" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" id="password" class="form-control" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Login</button>
+      <a href="registration" class="btn btn-secondary">Register</a>
+      <a href="password-recovery" class="btn btn-secondary">Forgot Password?</a>
+    </form>
+  </div>
+
+  <script src="pages/assets/js/login.js"></script>
+</body>
+</html>
