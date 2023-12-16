@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Login</title>
   <link href="pages/assets/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="pages/assets/css/styles.css">
+  <script src="vendor/edortta/yeapf2/src/js/yeapf2.js"></script>
 </head>
+
 <body>
   <!-- Login form -->
-  <div class="container">
+  <div class="container access-container">
     <h1>Login</h1>
     <form id="loginForm">
       <!-- Form fields -->
@@ -20,12 +23,18 @@
         <label for="password" class="form-label">Password</label>
         <input type="password" id="password" class="form-control" required>
       </div>
-      <button type="submit" class="btn btn-primary">Login</button>
+      <button id="btnLogin" type="button" class="btn btn-primary">Login</button>
       <a href="registration" class="btn btn-secondary">Register</a>
       <a href="password-recovery" class="btn btn-secondary">Forgot Password?</a>
     </form>
+    <div class="alert" role="alert" id="loginAlert" style="display:none"></div>
   </div>
+
+  <script>
+    window.sessionToken = "#(sessionToken)";    
+  </script>
 
   <script src="pages/assets/js/login.js"></script>
 </body>
+
 </html>

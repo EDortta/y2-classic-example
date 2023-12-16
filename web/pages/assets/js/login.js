@@ -1,27 +1,65 @@
+function displayMessage(message, type) {
+  var msg=y$('loginAlert');
+  msg.innerHTML=message;
+  msg.style.display="block";
 
-document.getElementById('loginForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-    // Retrieve username and password
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-  
-    // Example AJAX request using Fetch API (you'll need to handle this based on your backend)
-    fetch('/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ username, password })
-    })
-    .then(response => {
-      if (response.ok) {
-        // Redirect to admin page upon successful login
-        window.location.href = 'admin.html';
+  if (type=="error") {
+    msg.classList.add("alert-danger");
+    msg.classList.remove("alert-success");
+  } else {
+    msg.classList.add("alert-success");
+    msg.classList.remove("alert-danger");
+  }
+
+  setTimeout(function() {
+    msg.style.display="none";
+  }, 3000);
+}
+
+
+function processResponse(response) {
+  if (response.ok) {
+    response.json().then(data => {
+      console.log(data);
+      if (typeof data.sessionToken=="string") {
+        sessionToken=data.sessionToken;
+        window.location.href="admin";
       } else {
-        // Handle invalid login
-        // Display error message or perform necessary actions
+        displayMessage('Invalid credentials', 'error');
       }
-    })
-    .catch(error => console.error('Error:', error));
-  });
-  
+    }).catch(error => {
+      displayMessage('Error: ' + error.message, 'error');
+      console.error('Error:', error);
+    });
+  } else {
+    displayMessage('Server error', 'error');
+  }
+}
+
+function processError(error) {
+  console.error('Error:', error)
+}
+
+function loginEventHandler(event) {
+  event.preventDefault();
+
+  const username = y$('username').value;
+  const password = y$('password').value;
+
+  fetch('/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+    body: JSON.stringify({ username, password, sessionToken })
+  })
+    .then(processResponse)
+    .catch(processError);
+}
+
+function setBtnLoginEvent() {
+  yDom.addEvent("btnLogin", "click", loginEventHandler);
+}
+
+addOnLoadManager(setBtnLoginEvent);

@@ -1,4 +1,8 @@
-.container {
-    max-width: 480px;
-    margin: 0 auto; /* Center the container horizontally */
-  }
+.access-container {
+  max-width: 480px;
+  margin: 0 auto; /* Center the container horizontally */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh; /* Set the container height to fill the viewport */
+}

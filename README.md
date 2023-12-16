@@ -17,6 +17,7 @@ It's outside the scope of this README to explain how to install and keep update 
 ## How to install and use
 
 1. clone this project in any folder. The next lines goes to your main folder, create a folder `Projects`, enter into it, and finally clone the project.
+
    ```bash
    cd ~/
    mkdir -p Projects
@@ -35,9 +36,6 @@ It's outside the scope of this README to explain how to install and keep update 
    Receiving objects: 100% (29/29), 36.36 KiB | 16.00 KiB/s, done.
    Resolving deltas: 100% (4/4), done.
    ```
-
-   
-
 2. use composer to install/update the php components you'll need
 
    ```bash
@@ -64,9 +62,6 @@ It's outside the scope of this README to explain how to install and keep update 
    No security vulnerability advisories found.
    
    ```
-
-   
-
 3. build the docker containers using the recipe. Pay attention to change the `docker-compose.yml` if your local port 8183 is used by another application. Pay attention that if you don't have the `docker-compose` installed you will need to change it by `docker compose` (without the dash between the command `docker` and the parameter `compose`).
 
    ```bash
@@ -75,6 +70,7 @@ It's outside the scope of this README to explain how to install and keep update 
    ```
 
    The output is more or less like this:
+
    ```bash
    Building php-fpm
    Sending build context to Docker daemon  4.096kB
@@ -83,9 +79,6 @@ It's outside the scope of this README to explain how to install and keep update 
    Successfully built a94dcdc61f88
    Successfully tagged y2-classic-example_nginx:latest
    ```
-
-   
-
 4. grant the existence of some folders and files
 
    ```bash
@@ -94,9 +87,6 @@ It's outside the scope of this README to explain how to install and keep update 
    touch logs/nginx/error.log
    touch logs/nginx/access.log
    ```
-
-   
-
 5. let the containers become alive
 
    ```bash
@@ -113,18 +103,70 @@ It's outside the scope of this README to explain how to install and keep update 
    php-fpm_1  | [23-Nov-2023 13:04:52] NOTICE: fpm is running, pid 1
    php-fpm_1  | [23-Nov-2023 13:04:52] NOTICE: ready to handle connections
    nginx_1    | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
-   nginx_1    | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
-   nginx_1    | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
-   nginx_1    | 10-listen-on-ipv6-by-default.sh: info: IPv6 listen already enabled
-   nginx_1    | /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+   ...
    nginx_1    | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
    nginx_1    | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
    nginx_1    | /docker-entrypoint.sh: Configuration complete; ready for start up
    
    ```
-
-   
-
 6. open your browser and test `http:://localhost:8183`
 
    The output will be a login screen
+
+## The structure of the project
+
+Easily talking, if you're a [IT manager](docs/operation.md), you would like to take a look into `docker-compose.yml` and `infra` folder and left `web` for developers.
+Otherwise, if you're a [developer](docs/developer.md), you would like to take a look into `web` folder.
+
+Anyway, here is the tree. As they're well splitted, you can focus on your own interest while can take a look in the other. 
+
+```bash
+.
+├── README.md
+├── docker-compose.yml
+├── infra
+│   ├── nginx
+│   │   ├── Dockerfile
+│   │   ├── nginx.conf
+│   │   └── nginx.conf.backup
+│   ├── php-fpm
+│   │   ├── Dockerfile
+│   │   ├── php-debug.ini
+│   │   └── www.conf
+│   └── postgres
+│       └── pgdata
+├── logs
+│   └── nginx
+│       ├── access.log
+│       └── error.log
+└── web
+    ├── assets
+    │   ├── i18n
+    │   └── jwt-bin
+    ├── composer.json
+    ├── composer.lock
+    ├── config
+    │   ├── connection.json
+    │   ├── i18n.json
+    │   ├── mode.json
+    │   └── randomness.json
+    ├── index.php
+    ├── logs
+    │   ├── 2023-11-22.log
+    │   └── 2023-11-23.log
+    ├── pages
+    │   ├── assets
+    │   │   ├── css
+    │   │   │   ├── bootstrap.min.css
+    │   │   │   └── styles.css
+    │   │   ├── i18n
+    │   │   ├── js
+    │   │   │   ├── login.js
+    │   │   │   ├── password-recovery.js
+    │   │   │   └── registration.js
+    │   │   └── jwt-bin
+    │   ├── login.html
+    │   ├── password-recovery.html
+    │   └── registration.html    
+    └── vendor
+```
