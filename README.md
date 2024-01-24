@@ -87,6 +87,15 @@ It's outside the scope of this README to explain how to install and keep update 
    touch logs/nginx/error.log
    touch logs/nginx/access.log
    ```
+
+   Maybe you would need to adjust folder rights of `web/assets/jwt-bin` or `web/logs` as these folders are needed for correct operation. In such case, you can proceed like this:
+   ```bash
+   cd ~/Projects/y2-classic-example/web
+   mkdir logs
+   mkdir -p assets/jwt-bin
+   sudo chmod -R 0777 logs assets
+   ```
+   
 5. let the containers become alive
 
    ```bash
