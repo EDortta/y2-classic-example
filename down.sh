@@ -5,4 +5,4 @@ else
     recipe="docker-compose.yml"
 fi
 
-docker-compose --file $recipe down -d
+docker-compose --file $recipe down
