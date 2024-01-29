@@ -4,21 +4,22 @@ if [[ $EUID -eq 0 ]]; then
     exit 1
 fi
 
+zd=`which sudo`
 if [ ! -d var/logs ]; then
     mkdir -p var/logs
 fi
-sudo chmod -R 777 var
+$zd chmod -R 777 var
 
 if [ ! -d web/logs ]; then
     mkdir -p web/logs
 fi
-sudo chmod -R 777 web/logs
+$zd chmod -R 777 web/logs
 
 if [ ! -d web/assets ]; then
     mkdir -p web/assets
 fi
 
-sudo chmod -R 777 web/assets
+$zd chmod -R 777 web/assets
 
 if [ -f "docker-compose-devel.yml" ]; then
     recipe="docker-compose-devel.yml"
