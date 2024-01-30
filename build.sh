@@ -27,5 +27,6 @@ else
     recipe="docker-compose.yml"
 fi
 
+
 docker-compose --file $recipe build
 docker-compose --file $recipe up -d
