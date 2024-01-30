@@ -4,7 +4,7 @@ if [[ $EUID -eq 0 ]]; then
     exit 1
 fi
 
-zd=`which sudo`
+zd=`which sudo` > /dev/null 2>&1
 if [ ! -d var/logs ]; then
     mkdir -p var/logs
 fi
