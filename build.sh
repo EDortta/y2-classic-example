@@ -4,7 +4,14 @@ if [[ $EUID -eq 0 ]]; then
     exit 1
 fi
 
+echo "Building the docker images"
+
 zd=`which sudo` > /dev/null 2>&1
+if [ ! -z $zd ]; then
+    $zd -k
+    echo "We need the SUDO password to continue"
+fi
+
 if [ ! -d var/logs ]; then
     mkdir -p var/logs
 fi
