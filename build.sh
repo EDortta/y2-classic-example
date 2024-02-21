@@ -13,17 +13,17 @@ if [ ! -z $zd ]; then
 fi
 
 if [ ! -d var/logs ]; then
-    mkdir -p var/logs
+    $zd mkdir -p var/logs
 fi
 $zd chmod -R 777 var
 
 if [ ! -d web/logs ]; then
-    mkdir -p web/logs
+    $zd mkdir -p web/logs
 fi
 $zd chmod -R 777 web/logs
 
 if [ ! -d web/assets ]; then
-    mkdir -p web/assets
+    $zd mkdir -p web/assets
 fi
 
 $zd chmod -R 777 web/assets
