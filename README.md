@@ -31,6 +31,8 @@ It's outside the scope of this README to explain how to install and keep update 
    ```
 3. open your navigator in `http://localhost:8183`. If you already have a project running on that port, change it in `docker-compose.yml`
 
+4. login with `admin` / `admin` and a sample administration page will open. 
+
 ## How to install and use (Long version)
 
 1. clone this project in any folder. The next lines goes to your main folder, create a folder `Projects`, enter into it, and finally clone the project.
@@ -138,6 +140,9 @@ It's outside the scope of this README to explain how to install and keep update 
 6. open your browser and test `http:://localhost:8183`
 
    The output will be a login screen
+
+
+7. login with `admin` / `admin` and a sample administration page will open.    
 
 ## The structure of the project
 
