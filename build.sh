@@ -54,10 +54,13 @@ fi
 echo
 echo "CREATING DIRECTORIES"
 
-$zd mkdir -p var/logs/nginx
-$zd touch var/log/nginx/error.log
-$zd rouch var/log/nginx/access.log
-$zd chmod -R 777 var/logs
+$zd mkdir -p logs/nginx logs/php-fpm logs/php
+$zd touch logs/nginx/error.log
+$zd touch logs/nginx/access.log
+$zd touch logs/php-fpm/php-fpm.log
+$zd touch logs/php/php_errors.log
+$zd touch logs/php-fpm/www-error.log
+$zd chmod -R 777 logs
 
 $zd chmod -R 777 var
 if [ ! -d web/logs ]; then
