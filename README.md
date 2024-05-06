@@ -14,7 +14,26 @@ It is a good starting point for those searching a well known space while researc
 
 It's outside the scope of this README to explain how to install and keep update those tools.
 
-## How to install and use
+## How to install and use (Short version)
+1. clone this project in any folder. The next lines goes to your main folder, create a folder `Projects`, enter into it, and finally clone the project.
+
+   ```bash
+   cd ~/
+   mkdir -p Projects
+   cd Projects
+   git clone https://github.com/EDortta/y2-classic-example.git
+   ```
+2. run `build.sh` to grant the folders, check PHP version, grant composer and build the containers.
+   
+   ```bash
+   cd ~/Projects/y2-classic-example
+   ./build.sh
+   ```
+3. open your navigator in `http://localhost:8183`. If you already have a project running on that port, change it in `docker-compose.yml`
+
+4. login with `admin` / `admin` and a sample administration page will open. 
+
+## How to install and use (Long version)
 
 1. clone this project in any folder. The next lines goes to your main folder, create a folder `Projects`, enter into it, and finally clone the project.
 
@@ -121,6 +140,9 @@ It's outside the scope of this README to explain how to install and keep update 
 6. open your browser and test `http:://localhost:8183`
 
    The output will be a login screen
+
+
+7. login with `admin` / `admin` and a sample administration page will open.    
 
 ## The structure of the project
 

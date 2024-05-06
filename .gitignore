@@ -1,0 +1,12 @@
+/vendor/
+*.log
+*.tmp
+.idea/
+.vscode/
+.DS_Store
+*.code-workspace
+*.backup
+*-devel.*
+composer.lock
+/tests/_output/*
+/tests/_support/_generated
