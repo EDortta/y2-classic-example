@@ -3,18 +3,19 @@
         "server": "redis",
         "_server": "127.0.0.1",
         "port": 6379,
-        "password": "R3d1s@P@ssw0rd2023!",
+        "password": "Gr33n@P@ssw0rd2024!",
+
         "halt_on_error": true
     },
     "pdo": {
         "driver": "pgsql",
-        "server": "db",
+        "server": "pgsql",
         "_server": "127.0.0.1",
         "port": 5432,
         "dbname": "main",
         "schema": "public",
         "user": "postgres",
-        "password": "M@inD8b@seP@ssw0rd2023!",
+        "password": "Xt7#Qp2Lm9Bz",
         "halt_on_error": true,
         "pool": 1
     }

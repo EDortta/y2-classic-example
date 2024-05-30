@@ -1,9 +1,23 @@
 version: '3'
 services:
+  redis:
+    build:
+      context: ./infra/redis
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - redisdata:/data
+
   pgsql:
     build:
       context: ./infra/postgres
       dockerfile: Dockerfile
+    depends_on:
+      - redis
     restart: unless-stopped
     ports:
       - "54323:5432"
@@ -11,7 +25,6 @@ services:
         POSTGRES_PASSWORD: Xt7#Qp2Lm9Bz
     extra_hosts:
         - "host.docker.internal:host-gateway"
-
     volumes:
       - pgdata:/var/lib/postgresql/data
     networks:
@@ -50,4 +63,6 @@ networks:
     driver: bridge
 
 volumes:
+  redisdata:
+    driver: local
   pgdata:
