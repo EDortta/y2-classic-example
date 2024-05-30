@@ -29,6 +29,12 @@ RUN apk add --no-cache oniguruma
 RUN apk add --no-cache oniguruma-dev
 RUN docker-php-ext-install -j5 mbstring
 
+RUN apk add --no-cache $PHPIZE_DEPS
+RUN pecl channel-update pecl.php.net
+RUN pecl install redis-stable
+RUN pecl install openswoole
+RUN docker-php-ext-enable redis
+
 RUN mkdir -p /var/log/php-fpm /var/log/php
 RUN touch /var/log/php-fpm/www-error.log
 RUN touch /var/log/php/php_errors.log
