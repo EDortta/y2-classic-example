@@ -32,7 +32,17 @@ function processResponse(response) {
       console.error('Error:', error);
     });
   } else {
-    displayMessage('Server error', 'error');
+    switch (response.status) {
+      case 401:
+        displayMessage('Invalid credentials', 'error');
+        break;
+      case 500:
+        displayMessage('Server error', 'error');
+        break;
+      default:
+        displayMessage('Unknown error', 'error');
+        break;
+    }
   }
 }
 
