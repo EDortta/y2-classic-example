@@ -4,6 +4,8 @@ The developer focused tree, is called `web` and here is it tree:
 
 ```bash
 .
+├── .secure
+│   └── password.json
 ├── assets
 │   ├── i18n
 │   └── jwt-bin
@@ -15,7 +17,7 @@ The developer focused tree, is called `web` and here is it tree:
 │   └── randomness.json
 ├── index.php
 ├── logs
-│   └── 2023-11-23.log
+│   └── 2024-05-30.log
 ├── pages
 │   ├── assets
 │   │   ├── css
@@ -537,6 +539,10 @@ As you can see in `login.js`, we're indicating that we're accepting json as repo
 
 So, we can catch this in the server to attend that.
 
+#### First incarnation of login
+
+Here is the easiest way to control a login. Check this and the we will see something more clever. 
+
 In `index.php` we do that with this code:
 
 ```php
@@ -545,11 +551,23 @@ switch ($first) {
         if (\YeAPF\WebApp::clientExpectJSON()) {
             $request = \YeAPF\WebApp::getRequest();
             if ($request['username']=='admin' && $request['password']=='admin') {
+                // First token is just used for login
                 destroySessionToken();
+
+                // This new token is for administration
                 $context['sessionToken'] = createSessionToken(['adm']);
                 setcookie('sessionToken', $context['sessionToken'], time() + 3600, '/');
+
+                // YeAPF2 pay attention to __json in the context
+                // if it exists, then here will be the json response
+                // to the client.
+                $context['__json'] = json_encode([ 
+                  'userLogged' => true,
+                  'sessionToken' => $context['sessionToken']??null                
+                ]);
             } else {
                 http_response_code(401);
+                $context['error'] = 'Invalid credentials';
             }
         } else {
             $context['sessionToken'] = createSessionToken();
@@ -592,3 +610,51 @@ function processResponse(response) {
 }
 ```
 
+
+#### Second incarnation
+
+Here is a better way to treat the logon challenge:
+
+```php
+switch ($first) {
+    case 'login':
+        if (\YeAPF\WebApp::clientExpectJSON()) {
+            $request = \YeAPF\WebApp::getRequest();
+
+            if (file_exists('.secure/password.json')) {
+                $passwordFile = json_decode(file_get_contents('.secure/password.json'), true);
+            } else {
+                $passwordFile = [];
+            }
+
+            $userLogged=false;
+
+            if (isset($request['username']) && isset($request['password']) && isset($passwordFile[$request['username']])) {
+
+                if ($passwordFile[$request['username']]['password'] == $request['password']) {
+                    destroySessionToken();
+                    $context['sessionToken'] = createSessionToken(['adm']);
+                    setcookie('sessionToken', $context['sessionToken'], time() + 3600, '/');
+                    $userLogged = true;
+                }
+            }
+            $context['__json'] = json_encode([ 
+                'userLogged' => $userLogged,
+                'sessionToken' => $context['sessionToken']??null                
+            ]);
+            if (!$userLogged) {
+                http_response_code(401);
+                $context['error'] = 'Invalid username or password';
+            }
+
+        } else {
+            $context['sessionToken'] = createSessionToken();
+            setcookie('sessionToken', $context['sessionToken'], time() + 3600, '/');
+        }
+        break;
+    case 'logout':
+        destroySessionToken();
+        break;
+}
+
+```

@@ -1,5 +1,34 @@
 version: '3'
 services:
+  pgsql:
+    build:
+      context: ./infra/postgres
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "54323:5432"
+    environment:
+        POSTGRES_PASSWORD: Xt7#Qp2Lm9Bz
+    extra_hosts:
+        - "host.docker.internal:host-gateway"
+
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - spi-network
+
+  php-fpm:
+    build:
+      context: ./infra/php-fpm
+      dockerfile: Dockerfile
+    depends_on:
+      - pgsql
+    volumes:
+      - ./logs:/var/log
+      - ./web:/var/www/html
+    networks:
+      - spi-network
+
   nginx:
     build:
       context: ./infra/nginx
@@ -16,18 +45,9 @@ services:
     networks:
       - spi-network
 
-  php-fpm:
-    build:
-      context: ./infra/php-fpm
-      dockerfile: Dockerfile
-    volumes:
-      - ./logs:/var/log
-      - ./web:/var/www/html
-    networks:
-      - spi-network
-
-
 networks:
   spi-network:
     driver: bridge
 
+volumes:
+  pgdata:

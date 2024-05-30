@@ -31,7 +31,7 @@ It's outside the scope of this README to explain how to install and keep update 
    ```
 3. open your navigator in `http://localhost:8183`. If you already have a project running on that port, change it in `docker-compose.yml`
 
-4. login with `admin` / `admin` and a sample administration page will open. 
+4. login with `admin` / `admin` and a sample administration page will open. (Readme .secure/README.md in order to learn how to change that)
 
 ## How to install and use (Long version)
 
@@ -142,7 +142,7 @@ It's outside the scope of this README to explain how to install and keep update 
    The output will be a login screen
 
 
-7. login with `admin` / `admin` and a sample administration page will open.    
+7. login with `admin` / `admin` and a sample administration page will open. (Readme .secure/README.md in order to learn how to change that)
 
 ## The structure of the project
 
@@ -171,6 +171,8 @@ Anyway, here is the tree. As they're well splitted, you can focus on your own in
 │       ├── access.log
 │       └── error.log
 └── web
+    ├── .secure
+    │   └── password.json
     ├── assets
     │   ├── i18n
     │   └── jwt-bin
