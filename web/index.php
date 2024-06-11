@@ -90,14 +90,6 @@ switch ($first) {
                 $context['error'] = 'Invalid username or password';
             }
 
-            // if ($request['username'] == 'admin' && $request['password'] == 'admin') {
-            //     destroySessionToken();
-            //     $context['sessionToken'] = createSessionToken(['adm']);
-            //     setcookie('sessionToken', $context['sessionToken'], time() + 3600, '/');
-            // } else {
-            //     http_response_code(401);
-            //     $context['error'] = 'Invalid username or password';
-            // }
         } else {
             $context['sessionToken'] = createSessionToken();
             setcookie('sessionToken', $context['sessionToken'], time() + 3600, '/');

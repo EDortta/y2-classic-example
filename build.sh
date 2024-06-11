@@ -96,5 +96,5 @@ fi
 
 
 
-docker-compose --file $recipe build
-docker-compose --file $recipe up -d
+docker compose --file $recipe build
+docker compose --file $recipe up -d
