@@ -94,7 +94,10 @@ else
     recipe="docker-compose.yml"
 fi
 
+dc=`which docker-compose` > /dev/null 2>&1
+if [ -z $dc ]; then
+    dc="docker compose"
+fi
 
-
-docker compose --file $recipe build
-docker compose --file $recipe up -d
+$dc --file $recipe build
+$dc --file $recipe up -d
