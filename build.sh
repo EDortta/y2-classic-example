@@ -54,7 +54,7 @@ fi
 echo
 echo "CREATING DIRECTORIES"
 
-$zd mkdir -p logs/nginx logs/php-fpm logs/php
+$zd mkdir -p logs/nginx logs/php-fpm logs/php var/log var/logs
 $zd touch logs/nginx/error.log
 $zd touch logs/nginx/access.log
 $zd touch logs/php-fpm/php-fpm.log
