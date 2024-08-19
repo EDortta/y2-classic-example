@@ -8,10 +8,13 @@ fi
 
 dc=`which docker-compose` > /dev/null 2>&1
 if [ -z $dc ]; then
-    dc="docker compose"
+    dc="docker compose -f $recipe"
+else 
+    dc="docker-compose -f $recipe"
 fi
 
-cmd="$dc --file $recipe up -d $1"
+cmd="$dc up -d"
+
 echo "CMD = $cmd"
 
 $cmd

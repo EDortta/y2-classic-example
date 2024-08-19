@@ -96,8 +96,10 @@ fi
 
 dc=`which docker-compose` > /dev/null 2>&1
 if [ -z $dc ]; then
-    dc="docker compose"
+    dc="docker compose -f $recipe"
+else 
+    dc="docker-compose -f $recipe"
 fi
 
-$dc --file $recipe build
-$dc --file $recipe up -d
+$dc build
+$dc up -d
