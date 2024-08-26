@@ -8,7 +8,6 @@ $canCheckSyntax = function_exists('exec') && (strpos(ini_get('disable_functions'
     {
         global $canCheckSyntax;
 
-        // echo "Loading $filename canCheckSyntax=" . ($canCheckSyntax ? 'true' : 'false') . "\n";
         if ($canCheckSyntax) {
             exec('php -l ' . escapeshellarg($filename), $output, $return_var);
             if ($return_var === 0) {
@@ -47,11 +46,11 @@ $canCheckSyntax = function_exists('exec') && (strpos(ini_get('disable_functions'
         }
     }
 
-    // echo '<pre>';
+    
     $folders = ['api', 'pages', 'app', 'lib'];
     foreach ($folders as $folder) {
         loadFromFolder(__DIR__ . '/' . $folder);
     }
-    // echo '</pre>';
+    
 })();
 unset($canCheckSyntax);
