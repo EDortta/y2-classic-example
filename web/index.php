@@ -25,8 +25,8 @@ $context = [];
 \YeAPF\WebApp::setUselessURILevel(0);
 $uri = \YeAPF\WebApp::getURI('login');
 
-if (file_exists('api.php'))
-    require_once 'api.php';
+if (file_exists('apiLoader.php'))
+    require_once 'apiLoader.php';
 
 $first = \YeAPF\WebApp::splitURI()[0];
 switch ($first) {
